@@ -6,11 +6,11 @@ const Contact = () => {
     <Grid container style={{ paddingTop: 24 }}>
       <Grid item container justify="center" xs={12} sm={4} alignItems="center">
         <AlternateEmail fontSize="large" />
-        <Typography>asly2019@gmail.com</Typography>
+        <Typography>email</Typography>
       </Grid>
       <Grid item container justify="center" xs={12} sm={4} alignItems="center">
         <Instagram fontSize="large" />
-        <Typography>commandurr14</Typography>
+        <Typography>instagram</Typography>
       </Grid>
       <Grid item container justify="center" xs={12} sm={4} alignItems="center">
         <Home fontSize="large" />
