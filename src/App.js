@@ -4,6 +4,7 @@ import {
   Container,
   CssBaseline,
   IconButton,
+  makeStyles,
   Tab,
   Tabs,
   ThemeProvider,
@@ -13,6 +14,7 @@ import {
 import Contact from "./Tabs/Contact";
 import theme from "./theme";
 import Switch from "./Switch";
+import Portfolio from "./Tabs/Portfolio";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,42 +50,43 @@ function App() {
   return (
     <ThemeProvider theme={theme(darkTheme ? "dark" : "light")}>
       <CssBaseline />
-      <AppBar position="sticky">
-        <Toolbar style={{ color: "white" }}>
-          <div
-            style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}
-          >
-            <Typography variant="h6" style={{ textTransform: "uppercase" }}>
-              Ashley Sowell
-            </Typography>
-            <Typography variant="subtitle1" style={{ lineHeight: "initial" }}>
-              content designer + illustrator
-            </Typography>
-          </div>
-          <IconButton
-            edge="end"
-            color="inherit"
-            onClick={() => setDarkTheme((prev) => !prev)}
-          >
-            <Switch on={!darkTheme} />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        aria-label="simple tabs example"
-        indicatorColor="primary"
-        textColor="primary"
-        centered
-        style={{ position: "sticky", top: 64 }}
-      >
-        <Tab label="Portfolio" {...a11yProps(0)} />
-        <Tab label="About" {...a11yProps(1)} />
-        <Tab label="Contact" {...a11yProps(2)} />
-      </Tabs>
+      <div style={{ position: "sticky", top: 0 }}>
+        <AppBar position="static">
+          <Toolbar style={{ color: "white" }}>
+            <div
+              style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}
+            >
+              <Typography variant="h6" style={{ textTransform: "uppercase" }}>
+                Ashley Sowell
+              </Typography>
+              <Typography variant="subtitle1" style={{ lineHeight: "initial" }}>
+                content designer + illustrator
+              </Typography>
+            </div>
+            <IconButton
+              edge="end"
+              color="inherit"
+              onClick={() => setDarkTheme((prev) => !prev)}
+            >
+              <Switch on={!darkTheme} />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="simple tabs example"
+          indicatorColor="primary"
+          textColor="primary"
+          centered
+        >
+          <Tab label="Portfolio" {...a11yProps(0)} />
+          <Tab label="About" {...a11yProps(1)} />
+          <Tab label="Contact" {...a11yProps(2)} />
+        </Tabs>
+      </div>
       <TabPanel value={value} index={0}>
-        Item One
+        <Portfolio />
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two
