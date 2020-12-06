@@ -59,6 +59,7 @@ const Portfolio = () => {
             <img
               src={picture.metadata.photo.url}
               key={picture.slug}
+              alt={picture.title}
               onClick={() => {
                 setBigPicture(index);
               }}
@@ -88,6 +89,7 @@ const Portfolio = () => {
             style={{ maxWidth: "100%", maxHeight: "100%" }}
             src={pictures[bigPicture].metadata.photo.url}
             key={pictures[bigPicture].slug}
+            alt={pictures[bigPicture].title}
           />
         </div>
       )}
