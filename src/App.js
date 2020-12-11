@@ -14,10 +14,11 @@ import Contact from "./Tabs/Contact";
 import theme from "./theme";
 import Switch from "./Switch";
 import Portfolio from "./Tabs/Portfolio";
+import About from "./Tabs/About";
+import Cosmic from "cosmicjs";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     value === index && (
       <Container
@@ -39,9 +40,21 @@ function a11yProps(index) {
   };
 }
 
+export const BucketContext = React.createContext({ bucket: undefined });
+
 function App() {
   const [value, setValue] = React.useState(0);
+  const [bucket, setBucket] = React.useState(undefined);
   const [darkTheme, setDarkTheme] = React.useState(false);
+
+  React.useEffect(() => {
+    setBucket(
+      Cosmic().bucket({
+        slug: "as-portfolio",
+        read_key: "jQkk2h9nYBEyy9c312tNlHugLdMicd3oxsYdGDRJRo9gujv3E4",
+      })
+    );
+  }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -49,7 +62,16 @@ function App() {
   return (
     <ThemeProvider theme={theme(darkTheme ? "dark" : "light")}>
       <CssBaseline />
-      <div style={{ position: "sticky", top: 0, zIndex: 1100 }}>
+      <div
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 1100,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <AppBar position="static">
           <Toolbar style={{ color: "white" }}>
             <div
@@ -71,28 +93,32 @@ function App() {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="simple tabs example"
-          indicatorColor="primary"
-          textColor="primary"
-          centered
-        >
-          <Tab label="Portfolio" {...a11yProps(0)} />
-          <Tab label="About" {...a11yProps(1)} />
-          <Tab label="Contact" {...a11yProps(2)} />
-        </Tabs>
+        <AppBar position="static" color="default" style={{ width: "auto" }}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="simple tabs example"
+            indicatorColor="primary"
+            textColor="primary"
+            TabIndicatorProps={{ style: { height: 4 } }}
+          >
+            <Tab label="Portfolio" {...a11yProps(0)} />
+            <Tab label="About" {...a11yProps(1)} />
+            {/* <Tab label="Contact" {...a11yProps(2)} /> */}
+          </Tabs>
+        </AppBar>
       </div>
-      <TabPanel value={value} index={0}>
-        <Portfolio />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <Contact />
-      </TabPanel>
+      <BucketContext.Provider value={{ bucket }}>
+        <TabPanel value={value} index={0}>
+          <Portfolio />
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <About />
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <Contact />
+        </TabPanel>
+      </BucketContext.Provider>
     </ThemeProvider>
   );
 }
