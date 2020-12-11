@@ -114,19 +114,20 @@ const Portfolio = () => {
           e.stopPropagation();
         }}
       >
-        {bigPicture > 0 && (
-          <Fab
-            color="primary"
-            onClick={(e) => {
-              setBigPicture((prev) => prev - 1);
-              e.stopPropagation();
-            }}
-            className={classes.scrollButton}
-            style={{ bottom: 8 }}
-          >
-            <KeyboardArrowUp style={{ fontSize: 42 }} />
-          </Fab>
-        )}
+        <Fab
+          color="primary"
+          onClick={(e) => {
+            setBigPicture((prev) => prev - 1);
+            e.stopPropagation();
+          }}
+          className={classes.scrollButton}
+          style={{
+            bottom: 8,
+            visibility: bigPicture > 0 ? "visible" : "hidden",
+          }}
+        >
+          <KeyboardArrowUp style={{ fontSize: 42 }} />
+        </Fab>
         {bigPicture !== -1 && (
           <SideBySide>
             <img
@@ -149,19 +150,20 @@ const Portfolio = () => {
             )}
           </SideBySide>
         )}
-        {bigPicture < pictures.length - 1 && (
-          <Fab
-            color="primary"
-            onClick={(e) => {
-              setBigPicture((prev) => prev + 1);
-              e.stopPropagation();
-            }}
-            className={classes.scrollButton}
-            style={{ top: 8 }}
-          >
-            <KeyboardArrowDown style={{ fontSize: 42 }} />
-          </Fab>
-        )}
+        <Fab
+          color="primary"
+          onClick={(e) => {
+            setBigPicture((prev) => prev + 1);
+            e.stopPropagation();
+          }}
+          className={classes.scrollButton}
+          style={{
+            top: 8,
+            visibility: bigPicture < pictures.length - 1 ? "visible" : "hidden",
+          }}
+        >
+          <KeyboardArrowDown style={{ fontSize: 42 }} />
+        </Fab>
       </Backdrop>
     </>
   );
