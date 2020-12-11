@@ -49,7 +49,7 @@ function App() {
   return (
     <ThemeProvider theme={theme(darkTheme ? "dark" : "light")}>
       <CssBaseline />
-      <div style={{ position: "sticky", top: 0 }}>
+      <div style={{ position: "sticky", top: 0, zIndex: 1100 }}>
         <AppBar position="static">
           <Toolbar style={{ color: "white" }}>
             <div
