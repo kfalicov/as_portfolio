@@ -81,7 +81,7 @@ function App() {
                 Ashley Sowell
               </Typography>
               <Typography variant="subtitle1" style={{ lineHeight: "initial" }}>
-                content designer + illustrator
+                digital content creator • illustrator
               </Typography>
             </div>
             <IconButton
