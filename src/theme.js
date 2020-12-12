@@ -8,6 +8,9 @@ const theme = (type = "light") =>
         main: "#fe71dd",
       },
     },
+    typography: {
+      fontFamily: '"Poppins","Roboto","Helvetica", "Arial", sans-serif',
+    },
   });
 
 export default theme;
