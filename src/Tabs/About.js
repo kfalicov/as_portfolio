@@ -23,7 +23,6 @@ const About = () => {
           props: "content,metadata",
         })
         .then((data) => {
-          console.log(data.object);
           setAbout(data.object);
         });
   }, [bucket]);
