@@ -81,7 +81,6 @@ const Portfolio = () => {
           limit: 20,
         })
         .then((data) => {
-          console.log(data.objects);
           setPictures(data.objects);
         });
   }, [bucket]);

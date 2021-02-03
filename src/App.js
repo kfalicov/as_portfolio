@@ -1,30 +1,22 @@
 import React from "react";
-import {
-  AppBar,
-  Container,
-  CssBaseline,
-  IconButton,
-  Tab,
-  Tabs,
-  ThemeProvider,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
+import { Container, CssBaseline, ThemeProvider } from "@material-ui/core";
 import Contact from "./Tabs/Contact";
 import theme from "./theme";
-import Switch from "./Switch";
 import Portfolio from "./Tabs/Portfolio";
 import About from "./Tabs/About";
 import Cosmic from "cosmicjs";
+import Header from "./components/Header";
+import { CuteTab, CuteTabs } from "./components/CuteTabs";
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+  const { children, value, index, style, ...other } = props;
   return (
     value === index && (
       <Container
         role="tabpanel"
         id={`simple-tabpanel-${index}`}
         aria-labelledby={`simple-tab-${index}`}
+        style={{ ...style, overflow: "auto" }}
         {...other}
       >
         {children}
@@ -42,6 +34,8 @@ function a11yProps(index) {
 
 export const BucketContext = React.createContext({ bucket: undefined });
 
+const angle = 4;
+
 function App() {
   const [value, setValue] = React.useState(0);
   const [bucket, setBucket] = React.useState(undefined);
@@ -56,6 +50,8 @@ function App() {
     );
   }, []);
 
+  const size = `calc(100vw * ${Math.tan((angle * 3.14159) / 180)})`;
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -64,61 +60,39 @@ function App() {
       <CssBaseline />
       <div
         style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 1100,
+          position: "absolute",
+          width: "100%",
+          height: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
+          overflow: "hidden",
         }}
       >
-        <AppBar position="static">
-          <Toolbar style={{ color: "white" }}>
-            <div
-              style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}
-            >
-              <Typography variant="h6" style={{ textTransform: "uppercase" }}>
-                Ashley Sowell
-              </Typography>
-              <Typography variant="subtitle1" style={{ lineHeight: "initial" }}>
-                digital content creator • illustrator
-              </Typography>
-            </div>
-            <IconButton
-              edge="end"
-              color="inherit"
-              onClick={() => setDarkTheme((prev) => !prev)}
-            >
-              <Switch on={!darkTheme} />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <AppBar position="static" color="default" style={{ width: "auto" }}>
-          <Tabs
+        <Header angle={angle} darkTheme={darkTheme} setDarkTheme={setDarkTheme}>
+          <CuteTabs
             value={value}
             onChange={handleChange}
             aria-label="simple tabs example"
-            indicatorColor="primary"
-            textColor="primary"
             TabIndicatorProps={{ style: { height: 4 } }}
           >
-            <Tab label="Portfolio" {...a11yProps(0)} />
-            <Tab label="About" {...a11yProps(1)} />
+            <CuteTab label="Portfolio" {...a11yProps(0)} />
+            <CuteTab label="About" {...a11yProps(1)} />
+            {/* <CuteTab label="Resume" {...a11yProps(1)} /> */}
             {/* <Tab label="Contact" {...a11yProps(2)} /> */}
-          </Tabs>
-        </AppBar>
+          </CuteTabs>
+        </Header>
+        <BucketContext.Provider value={{ bucket }}>
+          <TabPanel value={value} index={0} style={{ paddingTop: size }}>
+            <Portfolio />
+          </TabPanel>
+          <TabPanel value={value} index={1} style={{ paddingTop: size }}>
+            <About />
+          </TabPanel>
+          <TabPanel value={value} index={2} style={{ paddingTop: size }}>
+            <Contact />
+          </TabPanel>
+        </BucketContext.Provider>
       </div>
-      <BucketContext.Provider value={{ bucket }}>
-        <TabPanel value={value} index={0}>
-          <Portfolio />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <About />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <Contact />
-        </TabPanel>
-      </BucketContext.Provider>
     </ThemeProvider>
   );
 }
