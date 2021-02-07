@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Backdrop, Fab, makeStyles, Typography } from "@material-ui/core";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@material-ui/icons";
 import { SideBySide } from "../Utils/SideBySide";
-import { BucketContext } from "../App";
+import { BucketContext } from "../Utils/BucketContext";
 
 const useStyles = makeStyles((theme) => ({
   masonry: {

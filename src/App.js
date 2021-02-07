@@ -4,6 +4,7 @@ import { Portfolio, About, Resume, Contact } from "./Tabs";
 import theme from "./theme";
 import Cosmic from "cosmicjs";
 import { Header, CuteTab, CuteTabs, Content } from "./components";
+import { BucketContext } from "./Utils/BucketContext";
 
 function TabPanel(props) {
   const { children, value, index, style, ...other } = props;
@@ -28,8 +29,6 @@ function a11yProps(index) {
     "aria-controls": `simple-tabpanel-${index}`,
   };
 }
-
-export const BucketContext = React.createContext({ bucket: undefined });
 
 const angle = 4;
 
