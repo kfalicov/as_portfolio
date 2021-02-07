@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, Paper } from "@material-ui/core";
 import { BucketContext } from "../Utils/BucketContext";
-import { Document } from "react-pdf/dist/esm/entry.webpack";
+import { Document, Page, pdfjs } from "react-pdf";
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const Resume = () => {
   const { bucket } = useContext(BucketContext);
@@ -14,17 +15,19 @@ const Resume = () => {
           props: "metadata",
         })
         .then((data) => {
-          setFile(data.object.metadata.pdf.url);
+          setFile(data.object.metadata.pdf.imgix_url);
         });
   }, [bucket]);
   return (
-    <Grid container style={{ paddingTop: 24 }}>
+    <Grid container style={{ justifyContent: "center" }}>
       {file && (
         <Document
           file={{
             url: file,
           }}
-        />
+        >
+          <Page pageNumber={1} renderAnnotationLayer={false} />
+        </Document>
       )}
     </Grid>
   );

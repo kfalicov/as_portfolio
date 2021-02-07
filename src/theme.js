@@ -7,6 +7,7 @@ const theme = (type = "light") =>
         "@global": {
           "::-webkit-scrollbar": {
             width: 8,
+            height: 8,
             borderRadius: 4,
           },
           "::-webkit-scrollbar-thumb": {

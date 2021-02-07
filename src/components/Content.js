@@ -4,6 +4,7 @@ import { withStyles } from "@material-ui/core";
 const styles = (theme) => ({
   root: {
     overflow: "auto",
+    flexGrow: 1,
     "&::-webkit-scrollbar": {
       background: theme.palette.action.hover,
     },
