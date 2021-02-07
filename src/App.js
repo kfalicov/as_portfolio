@@ -3,8 +3,7 @@ import { Container, CssBaseline, ThemeProvider } from "@material-ui/core";
 import { Portfolio, About, Resume, Contact } from "./Tabs";
 import theme from "./theme";
 import Cosmic from "cosmicjs";
-import Header from "./components/Header";
-import { CuteTab, CuteTabs } from "./components/CuteTabs";
+import { Header, CuteTab, CuteTabs, Content } from "./components";
 
 function TabPanel(props) {
   const { children, value, index, style, ...other } = props;
@@ -14,7 +13,7 @@ function TabPanel(props) {
         role="tabpanel"
         id={`simple-tabpanel-${index}`}
         aria-labelledby={`simple-tab-${index}`}
-        style={{ ...style, overflow: "auto" }}
+        style={{ ...style }}
         {...other}
       >
         {children}
@@ -79,20 +78,22 @@ function App() {
             {/* <Tab label="Contact" {...a11yProps(2)} /> */}
           </CuteTabs>
         </Header>
-        <BucketContext.Provider value={{ bucket }}>
-          <TabPanel value={value} index={0} style={{ paddingTop: size }}>
-            <Portfolio />
-          </TabPanel>
-          <TabPanel value={value} index={1} style={{ paddingTop: size }}>
-            <About />
-          </TabPanel>
-          <TabPanel value={value} index={2} style={{ paddingTop: size }}>
-            <Resume />
-          </TabPanel>
-          <TabPanel value={value} index={3} style={{ paddingTop: size }}>
-            <Contact />
-          </TabPanel>
-        </BucketContext.Provider>
+        <Content>
+          <BucketContext.Provider value={{ bucket }}>
+            <TabPanel value={value} index={0} style={{ paddingTop: size }}>
+              <Portfolio />
+            </TabPanel>
+            <TabPanel value={value} index={1} style={{ paddingTop: size }}>
+              <About />
+            </TabPanel>
+            <TabPanel value={value} index={2} style={{ paddingTop: size }}>
+              <Resume />
+            </TabPanel>
+            <TabPanel value={value} index={3} style={{ paddingTop: size }}>
+              <Contact />
+            </TabPanel>
+          </BucketContext.Provider>
+        </Content>
       </div>
     </ThemeProvider>
   );

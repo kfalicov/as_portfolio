@@ -47,6 +47,18 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
+    "& ::-webkit-scrollbar": {
+      background: "rgba(255, 255, 255, 0.08)",
+    },
+    "& ::-webkit-scrollbar-thumb": {
+      background: "rgba(255, 255, 255, 0.12)",
+      "&:hover": {
+        background: "rgba(255, 255, 255, 0.3)",
+      },
+      "&:active": {
+        background: "#fff",
+      },
+    },
   },
   description: {
     padding: theme.spacing(2),
