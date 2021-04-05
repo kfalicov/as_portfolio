@@ -54,6 +54,9 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     maxWidth: 400,
     maxHeight: 400,
+    "& a": {
+      color: "#ababab",
+    },
   },
   scrollButton: {
     flexShrink: 0,

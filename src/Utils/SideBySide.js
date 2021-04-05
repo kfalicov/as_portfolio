@@ -27,13 +27,6 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  description: {
-    padding: theme.spacing(2),
-    color: "white",
-    overflow: "auto",
-    maxWidth: 400,
-    maxHeight: 400,
-  },
   paragraph: {
     "& > p": {
       fontSize: 14,
