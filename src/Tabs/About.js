@@ -1,6 +1,6 @@
 import { makeStyles, Typography } from "@material-ui/core";
 import React, { useContext, useState } from "react";
-import { BucketContext } from "../App";
+import { BucketContext } from "../Utils/BucketContext";
 import { SideBySide } from "../Utils/SideBySide";
 
 const useStyles = makeStyles((theme) => ({

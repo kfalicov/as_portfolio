@@ -1,12 +1,10 @@
 import React from "react";
 import { Container, CssBaseline, ThemeProvider } from "@material-ui/core";
-import Contact from "./Tabs/Contact";
+import { Portfolio, About, Resume, Contact } from "./Tabs";
 import theme from "./theme";
-import Portfolio from "./Tabs/Portfolio";
-import About from "./Tabs/About";
 import Cosmic from "cosmicjs";
-import Header from "./components/Header";
-import { CuteTab, CuteTabs } from "./components/CuteTabs";
+import { Header, CuteTab, CuteTabs, Content } from "./components";
+import { BucketContext } from "./Utils/BucketContext";
 
 function TabPanel(props) {
   const { children, value, index, style, ...other } = props;
@@ -16,7 +14,7 @@ function TabPanel(props) {
         role="tabpanel"
         id={`simple-tabpanel-${index}`}
         aria-labelledby={`simple-tab-${index}`}
-        style={{ ...style, overflow: "auto" }}
+        style={{ ...style }}
         {...other}
       >
         {children}
@@ -31,8 +29,6 @@ function a11yProps(index) {
     "aria-controls": `simple-tabpanel-${index}`,
   };
 }
-
-export const BucketContext = React.createContext({ bucket: undefined });
 
 const angle = 4;
 
@@ -77,21 +73,26 @@ function App() {
           >
             <CuteTab label="Portfolio" {...a11yProps(0)} />
             <CuteTab label="About" {...a11yProps(1)} />
-            {/* <CuteTab label="Resume" {...a11yProps(1)} /> */}
+            <CuteTab label="Resume" {...a11yProps(2)} />
             {/* <Tab label="Contact" {...a11yProps(2)} /> */}
           </CuteTabs>
         </Header>
-        <BucketContext.Provider value={{ bucket }}>
-          <TabPanel value={value} index={0} style={{ paddingTop: size }}>
-            <Portfolio />
-          </TabPanel>
-          <TabPanel value={value} index={1} style={{ paddingTop: size }}>
-            <About />
-          </TabPanel>
-          <TabPanel value={value} index={2} style={{ paddingTop: size }}>
-            <Contact />
-          </TabPanel>
-        </BucketContext.Provider>
+        <Content>
+          <BucketContext.Provider value={{ bucket }}>
+            <TabPanel value={value} index={0} style={{ paddingTop: size }}>
+              <Portfolio />
+            </TabPanel>
+            <TabPanel value={value} index={1} style={{ paddingTop: size }}>
+              <About />
+            </TabPanel>
+            <TabPanel value={value} index={2} style={{ paddingTop: size }}>
+              <Resume />
+            </TabPanel>
+            <TabPanel value={value} index={3} style={{ paddingTop: size }}>
+              <Contact />
+            </TabPanel>
+          </BucketContext.Provider>
+        </Content>
       </div>
     </ThemeProvider>
   );

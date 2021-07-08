@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Backdrop, Fab, makeStyles, Typography } from "@material-ui/core";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@material-ui/icons";
 import { SideBySide } from "../Utils/SideBySide";
-import { BucketContext } from "../App";
+import { BucketContext } from "../Utils/BucketContext";
 
 const useStyles = makeStyles((theme) => ({
   masonry: {
@@ -47,6 +47,18 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
+    "& ::-webkit-scrollbar": {
+      background: "rgba(255, 255, 255, 0.08)",
+    },
+    "& ::-webkit-scrollbar-thumb": {
+      background: "rgba(255, 255, 255, 0.12)",
+      "&:hover": {
+        background: "rgba(255, 255, 255, 0.3)",
+      },
+      "&:active": {
+        background: "#fff",
+      },
+    },
   },
   description: {
     padding: theme.spacing(2),
